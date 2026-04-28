@@ -1,0 +1,246 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: "Fraunces", serif;
+    --font-body: "General Sans", sans-serif;
+    --font-mono: monospace;
+    --radius: 1rem;
+
+    --background: 0.99 0 0;
+    --foreground: 0.15 0 0;
+    --card: 1.0 0 0;
+    --card-foreground: 0.15 0 0;
+    --popover: 1.0 0 0;
+    --popover-foreground: 0.15 0 0;
+
+    --primary: 0.54 0.22 256;
+    --primary-foreground: 0.98 0 0;
+
+    --secondary: 0.95 0 0;
+    --secondary-foreground: 0.25 0 0;
+    --muted: 0.95 0 0;
+    --muted-foreground: 0.5 0 0;
+
+    --accent: 0.68 0.23 54;
+    --accent-foreground: 0.98 0 0;
+
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.98 0 0;
+
+    --border: 0.9 0 0;
+    --input: 0.9 0 0;
+    --ring: 0.54 0.22 256;
+
+    --chart-1: 0.68 0.23 54;
+    --chart-2: 0.7 0.19 142;
+    --chart-3: 0.54 0.22 256;
+    --chart-4: 0.56 0.2 250;
+    --chart-5: 0.48 0.18 120;
+
+    --sidebar: 0.98 0 0;
+    --sidebar-foreground: 0.15 0 0;
+    --sidebar-primary: 0.54 0.22 256;
+    --sidebar-primary-foreground: 0.98 0 0;
+    --sidebar-accent: 0.68 0.23 54;
+    --sidebar-accent-foreground: 0.98 0 0;
+    --sidebar-border: 0.9 0 0;
+    --sidebar-ring: 0.54 0.22 256;
+
+    --success: 0.7 0.19 142;
+    --success-foreground: 0.98 0 0;
+    --warning: 0.68 0.23 54;
+    --warning-foreground: 0.98 0 0;
+
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.54 0.22 256) 0%,
+      oklch(0.56 0.2 250) 100%
+    );
+    --gradient-glass: rgba(255, 255, 255, 0.08);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 0.08 0 0;
+    --foreground: 0.92 0.01 250;
+    --card: 0.15 0.02 250;
+    --card-foreground: 0.92 0.01 250;
+    --popover: 0.18 0.02 250;
+    --popover-foreground: 0.92 0.01 250;
+
+    --primary: 0.68 0.22 256;
+    --primary-foreground: 0.08 0 0;
+
+    --secondary: 0.22 0 0;
+    --secondary-foreground: 0.85 0 0;
+    --muted: 0.22 0.01 250;
+    --muted-foreground: 0.6 0.01 250;
+
+    --accent: 0.68 0.23 54;
+    --accent-foreground: 0.08 0 0;
+
+    --destructive: 0.65 0.19 22;
+    --destructive-foreground: 0.92 0.01 250;
+
+    --border: 0.25 0.02 250;
+    --input: 0.25 0.02 250;
+    --ring: 0.68 0.22 256;
+
+    --chart-1: 0.68 0.23 54;
+    --chart-2: 0.7 0.19 142;
+    --chart-3: 0.68 0.22 256;
+    --chart-4: 0.56 0.2 250;
+    --chart-5: 0.52 0.21 120;
+
+    --sidebar: 0.15 0.02 250;
+    --sidebar-foreground: 0.92 0.01 250;
+    --sidebar-primary: 0.68 0.22 256;
+    --sidebar-primary-foreground: 0.08 0 0;
+    --sidebar-accent: 0.68 0.23 54;
+    --sidebar-accent-foreground: 0.08 0 0;
+    --sidebar-border: 0.25 0.02 250;
+    --sidebar-ring: 0.68 0.22 256;
+
+    --success: 0.7 0.19 142;
+    --success-foreground: 0.08 0 0;
+    --warning: 0.68 0.23 54;
+    --warning-foreground: 0.08 0 0;
+
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.68 0.22 256) 0%,
+      oklch(0.56 0.2 250) 100%
+    );
+    --gradient-glass: rgba(68, 51, 204, 0.08);
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+}
+
+@font-face {
+  font-family: "General Sans";
+  src: url("/assets/fonts/GeneralSans.woff2") format("woff2");
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("/assets/fonts/Fraunces.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  .glass {
+    background: var(--gradient-glass);
+    backdrop-filter: blur(12px);
+    border: 1px solid oklch(var(--border) / 0.2);
+  }
+
+  .glass-elevated {
+    background: oklch(var(--card) / 0.4);
+    backdrop-filter: blur(16px);
+    border: 1px solid oklch(var(--border) / 0.15);
+    box-shadow: 0 8px 32px oklch(0 0 0 / 0.1);
+  }
+
+  .glass-hover {
+    @apply glass transition-smooth;
+  }
+
+  .glass-hover:hover {
+    background: var(--gradient-glass);
+    border-color: oklch(var(--primary) / 0.3);
+    box-shadow: 0 12px 40px oklch(0 0 0 / 0.15);
+  }
+
+  .shadow-glass {
+    box-shadow: 0 8px 32px oklch(0 0 0 / 0.12), 0 0 1px
+      oklch(var(--primary) / 0.1);
+  }
+
+  .shadow-glass-hover {
+    box-shadow: 0 12px 48px oklch(0 0 0 / 0.16), 0 0 2px
+      oklch(var(--primary) / 0.2);
+  }
+
+  .button-glass {
+    @apply glass px-4 py-2 rounded-lg font-body font-semibold transition-smooth;
+  }
+
+  .button-glass:hover {
+    @apply glass-hover;
+  }
+
+  .button-primary {
+    @apply bg-gradient-primary text-primary-foreground px-4 py-2 rounded-lg font-body font-semibold transition-smooth hover:shadow-glass-hover;
+  }
+
+  .button-success {
+    @apply bg-success text-success-foreground px-4 py-2 rounded-lg font-body font-semibold transition-smooth hover:shadow-glass-hover;
+  }
+
+  .button-accent {
+    @apply bg-accent text-accent-foreground px-4 py-2 rounded-lg font-body font-semibold transition-smooth hover:shadow-glass-hover;
+  }
+
+  .card-glass {
+    @apply glass-elevated rounded-2xl p-6 transition-smooth;
+  }
+
+  .card-glass:hover {
+    @apply shadow-glass-hover;
+  }
+
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .badge-success {
+    @apply inline-flex items-center px-3 py-1 rounded-full bg-success/10 text-success text-xs font-semibold;
+  }
+
+  .badge-warning {
+    @apply inline-flex items-center px-3 py-1 rounded-full bg-warning/10 text-warning text-xs font-semibold;
+  }
+
+  .badge-pending {
+    @apply inline-flex items-center px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold;
+  }
+
+  .badge-not-linked {
+    @apply inline-flex items-center px-3 py-1 rounded-full bg-muted/50 text-muted-foreground text-xs font-semibold;
+  }
+
+  .badge-verified {
+    @apply badge-success;
+  }
+
+  .nav-item {
+    @apply flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-smooth;
+  }
+
+  .nav-item-active {
+    @apply text-primary bg-primary/10;
+  }
+
+  .nav-item-inactive {
+    @apply text-muted-foreground hover:text-foreground;
+  }
+}

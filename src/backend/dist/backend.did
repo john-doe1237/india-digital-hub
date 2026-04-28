@@ -1,0 +1,99 @@
+type WebAuthnCredentialPublic = 
+ record {
+   createdAt: Timestamp;
+   credentialId: blob;
+   deviceName: text;
+ };
+type UserProfilePublic = 
+ record {
+   createdAt: Timestamp;
+   email: text;
+   name: text;
+   phone: text;
+   updatedAt: Timestamp;
+   userId: UserId;
+ };
+type UserId = principal;
+type UpdateServicePayload = 
+ record {
+   metadata: text;
+   serviceId: text;
+   status: ServiceStatus;
+ };
+type UpdateProfilePayload = 
+ record {
+   email: text;
+   name: text;
+   phone: text;
+ };
+type Timestamp = int;
+type ServiceStatus = 
+ variant {
+   NotLinked;
+   Pending;
+   Verified;
+ };
+type ServiceCategory = 
+ variant {
+   Finance;
+   FoodSecurity;
+   Identity;
+   Travel;
+   Utilities;
+ };
+type GovServicePublic = 
+ record {
+   category: ServiceCategory;
+   lastUpdated: Timestamp;
+   metadata: text;
+   name: text;
+   serviceId: text;
+   status: ServiceStatus;
+ };
+type FileType = 
+ variant {
+   Image;
+   PDF;
+ };
+type Document = 
+ record {
+   category: text;
+   description: text;
+   docId: nat;
+   fileType: FileType;
+   title: text;
+   uploadDate: Timestamp;
+ };
+type AddDocumentPayload = 
+ record {
+   category: text;
+   description: text;
+   fileType: FileType;
+   title: text;
+ };
+service : {
+  addDocument: (payload: AddDocumentPayload) -> (nat);
+  deleteDocument: (docId: nat) -> (bool);
+  getUserDocuments: () -> (vec Document) query;
+  getUserProfile: () -> (opt UserProfilePublic) query;
+  getUserServices: () -> (vec GovServicePublic) query;
+  getWebAuthnCredentials: () -> (vec WebAuthnCredentialPublic) query;
+  initUserData: () -> ();
+  registerWebAuthnCredential: (credentialId: blob, publicKey: blob,
+   deviceName: text) -> (variant {
+                           err: text;
+                           ok: text;
+                         });
+  removeWebAuthnCredential: (credentialId: blob) ->
+   (variant {
+      err: text;
+      ok: text;
+    });
+  updateProfile: (payload: UpdateProfilePayload) -> ();
+  updateServiceStatus: (payload: UpdateServicePayload) -> (bool);
+  verifyWebAuthnCredential: (credentialId: blob) ->
+   (variant {
+      err: text;
+      ok: bool;
+    });
+}

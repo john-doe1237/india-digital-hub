@@ -1,0 +1,27 @@
+{
+  "overview": "India Digital Hub — a super app unifying all major Indian government services (Aadhaar, Voter ID, Passport, Ration Card, utilities, finance) into one beautifully designed, accessible platform with biometric login, glassmorphism UI, and preloaded demo data.",
+  "features": [
+    "Internet Identity login",
+    "Fingerprint/biometric login via WebAuthn",
+    "Glassmorphism dashboard with Electric Indigo gradient",
+    "5 service categories: Identity, Food Security, Utilities, Finance, Travel",
+    "Verified/Pending/Not Linked status cards per service",
+    "Preloaded demo data on first login",
+    "Dark mode default with light mode toggle",
+    "Document management",
+    "Profile page with biometric credential management",
+    "Smooth animations and micro-interactions"
+  ],
+  "category": "productivity",
+  "tags": [
+    "government",
+    "india",
+    "super-app",
+    "biometric",
+    "webauthn",
+    "glassmorphism",
+    "dark-mode",
+    "services"
+  ],
+  "last_updated": "2026-04-28T17:54:24.782Z"
+}

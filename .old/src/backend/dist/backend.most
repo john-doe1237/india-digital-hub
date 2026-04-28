@@ -1,0 +1,87 @@
+// Version: 1.0.0
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type Document__57377506 =
+  {
+    category : Text;
+    description : Text;
+    docId : Nat;
+    fileType : FileType__148874995;
+    title : Text;
+    uploadDate : Timestamp__301639476
+  };
+type FileType__148874995 = {#Image; #PDF};
+type GovService__889136835 =
+  {
+    category : ServiceCategory__313329945;
+    var lastUpdated : Timestamp__301639476;
+    var metadata : Text;
+    name : Text;
+    serviceId : Text;
+    var status : ServiceStatus__1010385203
+  };
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type List__415060402<T> = List__790383201<T>;
+type List__790383201<T> =
+  {
+    var blockIndex : Nat__490723111;
+    var blocks : [var [var ?T]];
+    var elementIndex : Nat__490723111
+  };
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type ServiceCategory__313329945 =
+  {#Finance; #FoodSecurity; #Identity; #Travel; #Utilities};
+type ServiceStatus__1010385203 = {#NotLinked; #Pending; #Verified};
+type Timestamp__301639476 = Int;
+type Timestamp__766930454 = Timestamp__301639476;
+type UserId__158757552 = Principal;
+type UserId__881777788 = UserId__158757552;
+type UserProfile__446616884 =
+  {
+    createdAt : Timestamp__301639476;
+    var email : Text;
+    var name : Text;
+    var phone : Text;
+    var updatedAt : Timestamp__301639476;
+    userId : UserId__158757552
+  };
+type WebAuthnCredential__129089506 =
+  {
+    createdAt : Timestamp__766930454;
+    credentialId : Blob;
+    deviceName : Text;
+    publicKey : Blob
+  };
+actor {
+  stable documents :
+    {
+      var root :
+        Node__46230540<UserId__158757552, List__415060402<Document__57377506>>;
+      var size : Nat__490723111
+    };
+  stable var nextDocId : Nat;
+  stable profiles :
+    {
+      var root : Node__46230540<UserId__158757552, UserProfile__446616884>;
+      var size : Nat__490723111
+    };
+  stable services :
+    {
+      var root :
+        Node__46230540<UserId__158757552,
+                        List__415060402<GovService__889136835>>;
+      var size : Nat__490723111
+    };
+  stable webauthnCredentials :
+    {
+      var root :
+        Node__46230540<UserId__881777788,
+                        List__415060402<WebAuthnCredential__129089506>>;
+      var size : Nat__490723111
+    }
+};
